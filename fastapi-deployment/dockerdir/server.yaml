@@ -1,0 +1,3 @@
+request_serializer:
+  type: pil_numpy
+type: fastapi

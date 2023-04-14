@@ -10,7 +10,7 @@ from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, Messa
 # create a telegram bot and paste it here, or use `flyctl secrets set TELEGRAM_TOKEN=token` to set it secretly
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "YOUR_TOKEN")
 # add URL of you REST API app here
-client = HTTPClient(host="https://art-expert-fastapi.fly.dev", port=None)
+client = HTTPClient(host="https://art-expert-igor2.fly.dev", port=None)
 
 
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:

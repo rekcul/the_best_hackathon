@@ -1,6 +1,6 @@
-# fly.toml file generated for art-expert-igor2bot on 2023-04-13T17:10:24+03:00
+# fly.toml file generated for art-expert-igor on 2023-04-13T14:35:14+03:00
 
-app = "art-expert-igor2bot"
+app = "art-expert-igor"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "lax"
@@ -22,9 +22,3 @@ primary_region = "lax"
     type = "connections"
     hard_limit = 25
     soft_limit = 20
-
-  [[services.tcp_checks]]
-    interval = "15s"
-    timeout = "2s"
-    grace_period = "1s"
-    restart_limit = 0

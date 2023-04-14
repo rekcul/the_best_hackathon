@@ -1,9 +1,13 @@
-# fly.toml file generated for art-expert-igor on 2023-04-13T14:35:14+03:00
+# fly.toml file generated for art-expert-igor2 on 2023-04-14T14:46:51+03:00
 
-app = "art-expert-igor"
+app = "art-expert-igor2"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "lax"
+
+[metrics]
+  port = 8080
+  path = "/metrics"
 
 [[services]]
   protocol = "tcp"

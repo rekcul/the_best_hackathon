@@ -23,12 +23,19 @@ METRIC_EXAMPLE = Counter(
 
 def http_requested_languages_total(info: Info) -> None:
     langs = set()
-    lang_str = info.request.headers["Accept-Language"]
-    for element in lang_str.split(","):
-        element = element.split(";")[0].strip().lower()
-        langs.add(element)
-    for language in langs:
-        METRIC_EXAMPLE.labels(language).inc()
+    print(info.request.headers)
+    try:
+        if "Accept-Language".lower() in [c.lower() for c in info.request.headers.keys()]:
+            lang_str = info.request.headers["Accept-Language"]
+            for element in lang_str.split(","):
+                element = element.split(";")[0].strip().lower()
+                langs.add(element)
+            for language in langs:
+                METRIC_EXAMPLE.labels(language).inc()
+        else:
+            METRIC_EXAMPLE.labels('nan').inc()
+    except:
+        METRIC_EXAMPLE.labels('nan').inc()
 
 
 MEAN_PIXEL_VALUE = Histogram(
@@ -43,7 +50,9 @@ async def image_middle_pixel_value(info: Info) -> None:
     # and calculate some metrics, but it doesn't work
     # (limitations of `prometheus_fastapi_instrumentator`)
     # keeping the code piece as an example though
-    form = await info.request.form()
-    im = Image.open(form['file'].file)
-    mean_value = np.array(im).mean()
-    MEAN_PIXEL_VALUE.observe(mean_value)
+    # if info.request.url.path == '/predict':
+    #     form = await info.request.form()
+    #     im = Image.open(form['file'].file)
+    #     mean_value = np.array(im).mean()
+    #     MEAN_PIXEL_VALUE.observe(mean_value)
+    pass

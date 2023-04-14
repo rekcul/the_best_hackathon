@@ -21,9 +21,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued."""
     await update.message.reply_text(
         f"Привет, {update.effective_user.first_name}! На связи ИИ. (Yes, I mean the ARTIFICIAL INTELLEGENCE). \n\n"
-        f"Я взял все картины проданные на аукционе sothebys.com и "
-        "обучил свою нейросеть, чтобы предсказать их стоимость.\n\n"
-        "Отправь мне фотографию своего рисунка и я скажу, how much bucks он может стоить.",
+        f"засунь в меня картинку, а я отвечу за стоимость "
+        ,
     )
 
 
@@ -39,10 +38,9 @@ async def estimate_price(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 Author: {{author}}
 Date: {np.random.choice(["2023", "Beginning of XXI century", "2020-es"])}
 Estimated price: {{price}} $ [Sothebys auction]
-Style: {np.random.choice(["Surrealism", "Realism", "Abstract Art", "Impressionism"])}
+Style: {np.random.choice(["фотка"])}
 Genre: {np.random.choice(["animal painting", "portrait", "abstract", "illustration", "sketch and study", "figurative", "landscape"])}
 Media: {np.random.choice(["oil", "pencil", "photo"])}
-Similar painting: https://www.sothebys.com/en/buy/fine-art/paintings/abstract/_eve-ackroyd-woman-as-still-life-4eb9
     """
     # Price is estimated using Sothebys.com data
     # Other characteristics can be predicted using Wikiart data

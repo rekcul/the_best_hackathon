@@ -1,0 +1,104 @@
+artifacts:
+  model/data:
+    hash: 3dbed5bf4ab3257349a269a568a84cb5
+    size: 16382449
+    uri: model_mlem/model
+  postprocess/data.pkl:
+    hash: 86bd06d54d694961a4c9de7e1d167aa2
+    size: 551
+    uri: model_mlem/postprocess
+  preprocess/data.pkl:
+    hash: 937b6a7701cb0328dfbdd71d089c768c
+    size: 974
+    uri: model_mlem/preprocess
+call_orders:
+  __call__:
+  - - preprocess
+    - __call__
+  - - model
+    - __call__
+  - - postprocess
+    - __call__
+object_type: model
+processors:
+  model:
+    methods:
+      __call__:
+        args: []
+        name: __call__
+        returns:
+          dtype: float32
+          shape:
+          - null
+          - 1
+          type: torch
+        varargs: args
+        varargs_type:
+          dtype: float32
+          shape:
+          - null
+          - 3
+          - 224
+          - 224
+          type: torch
+        varkw: kwargs
+    type: torch
+  postprocess:
+    io:
+      type: pickle
+    methods:
+      __call__:
+        args:
+        - name: x
+          type_:
+            dtype: float32
+            shape:
+            - null
+            - 1
+            type: torch
+        name: __call__
+        returns:
+          item_types:
+            price:
+              dtype: float32
+              type: number
+          type: dict
+    type: callable
+  preprocess:
+    io:
+      type: pickle
+    methods:
+      __call__:
+        args:
+        - name: x
+          type_:
+            dtype: uint8
+            shape:
+            - null
+            - 770
+            - 3
+            type: ndarray
+        name: __call__
+        returns:
+          dtype: float32
+          shape:
+          - null
+          - 3
+          - 224
+          - 224
+          type: torch
+    type: callable
+requirements:
+- extra_index: https://download.pytorch.org/whl/cpu
+  module: torch
+  source_url: https://download.pytorch.org/whl/cu118/torch-2.0.0%2Bcu118-cp39-cp39-linux_x86_64.whl
+  version: 2.0.0
+- module: numpy
+  version: 1.22.4
+- extra_index: https://download.pytorch.org/whl/cpu
+  module: torchvision
+  source_url: https://download.pytorch.org/whl/cu118/torchvision-0.15.1%2Bcu118-cp39-cp39-linux_x86_64.whl
+  version: 0.15.1
+- module: PIL
+  package_name: Pillow
+  version: 8.4.0

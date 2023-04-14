@@ -1,28 +1,31 @@
-# fly.toml file generated for art-expert-igor2 on 2023-04-14T14:46:51+03:00
+# fly.toml file generated for art-expert-shadi on 2023-04-14T00:10:47+04:00
 
-app = "art-expert-igor2"
+app = "art-expert-shadi"
 kill_signal = "SIGINT"
 kill_timeout = 5
+mounts = []
 primary_region = "lax"
+processes = []
 
 [metrics]
   port = 8080
   path = "/metrics"
 
 [[services]]
-  protocol = "tcp"
   internal_port = 8080
   processes = ["app"]
-
-  [[services.ports]]
-    port = 80
-    handlers = ["http"]
-    force_https = true
-
-  [[services.ports]]
-    port = 443
-    handlers = ["tls", "http"]
+  protocol = "tcp"
   [services.concurrency]
-    type = "connections"
     hard_limit = 25
     soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+

@@ -3,6 +3,15 @@ import numpy as np
 from PIL import Image
 from prometheus_client import Counter, Histogram, Gauge
 
+RANDOM_VALUE_NORM = Gauge(
+    "random_value_norm",
+    "Random value norm that is set to show monitoring works"
+)
+
+
+def random_value_norm(info: Info) -> None:
+    RANDOM_VALUE_NORM.set(np.random.normal())
+
 
 RANDOM_VALUE = Gauge(
     "random_value",
@@ -11,15 +20,6 @@ RANDOM_VALUE = Gauge(
 
 def random_value(info: Info) -> None:
     RANDOM_VALUE.set(np.random.random())
-
-RANDOM_VALUE_NORM = Gauge(
-    "random_value",
-    "Random value that is set to show monitoring works"
-)
-
-def random_value_norm(info: Info) -> None:
-    RANDOM_VALUE_NORM.set(np.random.normal())
-
 
 METRIC_EXAMPLE = Counter(
     "http_requested_languages_total",
@@ -53,15 +53,19 @@ def http_requested_languages_total(info: Info) -> None:
 
 
 def http_users_agent_total(info: Info) -> None:
-    agents = set()
     try:
         list = [c for c in info.request.headers.keys() if "user-agent".lower() == c.lower()]
         if len(list) > 0 :
-            agent = info.request.headers[list[0]].split('/')[0]
-            METRIC_EXAMPLE.labels(agent).inc()
-            for agentt in agents:
-                METRIC_EXAMPLE_AGENT.labels(agentt).inc()
-            print(METRIC_EXAMPLE_AGENT)
+            agent_ = info.request.headers[list[0]].split('/')[0]
+            if agent_ in ('TelegramBot (like TwitterBot)', 'python-requests'):
+                agent = 'Telegram'
+            elif agent_ in ('Mozilla'):
+                agent = 'Web'
+            elif agent_ in ('Vector'):
+                agent = 'prometheus'
+            else:
+                agent = agent_
+            METRIC_EXAMPLE_AGENT.labels(agent).inc()
         else:
             METRIC_EXAMPLE_AGENT.labels('nan').inc()
     except:

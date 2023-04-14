@@ -1,5 +1,6 @@
-app_name: art-expert-igor
+app_name: art-expert-the-best
 object_type: deployment
+org: Maxim
 scale_memory: 2048
 server:
   request_serializer:

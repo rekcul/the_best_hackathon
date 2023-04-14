@@ -1,11 +1,15 @@
-# fly.toml file generated for art-expert-igor2 on 2023-04-13T16:23:22+03:00
+# fly.toml file generated for art-expert-shadi on 2023-04-14T00:10:47+04:00
 
-app = "art-expert-igor2"
+app = "art-expert-shadi"
 kill_signal = "SIGINT"
 kill_timeout = 5
 mounts = []
 primary_region = "lax"
 processes = []
+
+[metrics]
+  port = 8080
+  path = "/metrics"
 
 [[services]]
   internal_port = 8080
@@ -24,3 +28,4 @@ processes = []
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
+

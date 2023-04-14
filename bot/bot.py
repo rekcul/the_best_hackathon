@@ -8,11 +8,11 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters
 
 # create a telegram bot and paste it here, or use `flyctl secrets set TELEGRAM_TOKEN=token` to set it secretly
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "YOUR_TOKEN")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+MODEL_BASE_URL = os.getenv("MODEL_BASE_URL")
 # add URL of you REST API app here
-client = HTTPClient(host="https://art-expert-igor2.fly.dev", port=None)
 
-
+client = HTTPClient(host=MODEL_BASE_URL, port=None)
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Hello {update.effective_user.first_name}')
 

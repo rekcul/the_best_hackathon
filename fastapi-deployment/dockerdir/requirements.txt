@@ -1,6 +1,9 @@
-numpy==1.22
-tensorflow==2.11.0
-keras==2.11
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.0.0
+numpy==1.22.4
+torchvision==0.15.1
+Pillow==8.4.0
 uvicorn==0.21.1
 fastapi==0.95.0
-Pillow==9.5.0
+prometheus-fastapi-instrumentator==6.0.0
+prometheus-client

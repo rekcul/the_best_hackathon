@@ -5,6 +5,10 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "lax"
 
+[metrics]
+  port = 8080
+  path = "/metrics"
+
 [[services]]
   protocol = "tcp"
   internal_port = 8080
@@ -21,4 +25,5 @@ primary_region = "lax"
   [services.concurrency]
     type = "connections"
     hard_limit = 25
-    soft_limit = 20
+    soft_limit = 20    
+    
